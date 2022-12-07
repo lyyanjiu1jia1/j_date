@@ -2,7 +2,8 @@
 // Created by Yang Liu on 2022/12/7.
 //
 
-#include "since_epoch.h"
+#include <since_epoch.h>
+#include <iostream>
 
 SinceEpoch::SinceEpoch():
             ONE_DAY(std::chrono::hours(24)),
@@ -10,8 +11,13 @@ SinceEpoch::SinceEpoch():
             ONE_MINUTE(std::chrono::minutes(1))
 {}
 
-std::string SinceEpoch::GetTimePointSinceEpoch(const uint64_t& target) {
+std::string SinceEpoch::GetTimePointSinceEpoch(const uint64_t& target) const {
     auto cur_tp = std::chrono::system_clock::now();
+
+    auto thres_tp = cur_tp - ONE_HOUR;
+    if (target > getDurationSinceEpoch(thres_tp)) {
+        throw std::out_of_range("out of range");
+    }
 
     uint64_t cur_duration;
 

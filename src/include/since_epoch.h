@@ -14,7 +14,7 @@ using TimePoint = std::chrono::time_point<std::chrono::system_clock>;
 class SinceEpoch {
 public:
     SinceEpoch();
-    std::string GetTimePointSinceEpoch(const uint64_t& target);
+    std::string GetTimePointSinceEpoch(const uint64_t& target) const;
 
 private:
     const decltype(std::chrono::hours()) ONE_DAY;
